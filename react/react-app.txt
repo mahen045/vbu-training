@@ -1,0 +1,84 @@
+Steps to create react app
+--------------------------
+npx create-react-app react-blog-app
+cd react-blog-app
+
+npm install bootstrap
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+App.js
+-------
+import React, { useState } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+const App = () => {
+  const [title, setTitle] = useState('');
+  const [content, setContent] = useState('');
+  const [posts, setPosts] = useState([]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (title === '' || content === '') {
+      alert('Please fill in both fields.');
+      return;
+    }
+
+    const newPost = { title, content };
+    setPosts([newPost, ...posts]);
+
+    setTitle('');
+    setContent('');
+  };
+
+  return (
+    <div className="container mt-5">
+      <h1 className="text-center">Blog Post Application</h1>
+
+      {/* Form to add a blog post */}
+      <form onSubmit={handleSubmit} className="mb-4">
+        <div className="mb-3">
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Enter blog title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+        </div>
+        <div className="mb-3">
+          <textarea
+            className="form-control"
+            placeholder="Enter blog content"
+            rows="4"
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+          ></textarea>
+        </div>
+        <button type="submit" className="btn btn-primary w-100">
+          Add Post
+        </button>
+      </form>
+
+      {/* Display blog posts */}
+      <h2>All Blog Posts</h2>
+      {posts.length === 0 ? (
+        <p>No posts to display.</p>
+      ) : (
+        <div>
+          {posts.map((post, index) => (
+            <div className="card mb-3" key={index}>
+              <div className="card-body">
+                <h3 className="card-title">{post.title}</h3>
+                <p className="card-text">{post.content}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default App;
