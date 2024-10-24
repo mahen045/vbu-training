@@ -1,0 +1,60 @@
+1. Install Mongo DB
+	If MongoDB is not already installed on your system, 
+	download it from MongoDB official website and follow the installation instructions.
+	
+2. Start MongoDB server
+		After installation, you need to start the MongoDB server (also called mongod):
+		run "mongod" on command prompt
+		
+3. Connect to mongodb shell
+		run "mongo" on command prompt
+			
+4. Create database:
+		In MongoDB, databases are created automatically when you insert data.
+		However, you can switch to a database and then create collections within it.
+		To switch to a new database (if it doesn't exist, it will be created once you add data):
+		 <use mydatabase>
+		 
+5. Create a collection:
+		Collections in MongoDB are similar to tables in relational databases,
+		and documents are similar to rows. You can create a collection and insert 
+		documents into it with the following commands.
+		Insert a document into the users collection (which will be created if it doesn’t exist):
+		
+		db.users.insertOne({
+			name: "John Doe",
+			email: "john@example.com",
+			age: 30
+		})
+		This will insert a single document (record) into the users collection.
+		
+Insert multiple documents into the users collection:
+
+		db.users.insertMany([
+			{ name: "Alice", email: "alice@example.com", age: 25 },
+			{ name: "Bob", email: "bob@example.com", age: 35 }
+		])
+		
+6. To check the documents in the collection, you can use the find command:	
+		db.users.find().pretty()
+
+7. Update documents:
+	You can update a document using the updateOne or updateMany methods:
+	db.users.updateOne(
+		{ name: "John Doe" }, 
+		{ $set: { age: 31 } }
+	)
+	
+8 Delete document
+		db.users.deleteOne({ name: "John Doe" })
+
+		db.users.deleteMany({})
+		
+9. Show all databases and collections
+		show dbs
+		show collections
+
+
+
+
+		
